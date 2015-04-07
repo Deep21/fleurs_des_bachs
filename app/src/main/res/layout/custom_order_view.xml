@@ -1,0 +1,269 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:id="@+id/order_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/h1_detail_commande"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Afficher les détails de commande"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/h2_detail_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Afficher les détails de commande"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <RelativeLayout
+            android:id="@+id/order_details"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/h2_detail_exp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/corner_layout"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/lbl_date_de_commande"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date de commande"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/lbl_num_commande"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/lbl_date_de_commande"
+                android:text="Numéro de commande"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/date_de_commande"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/num_commande"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/lbl_num_commande"
+                android:text="TextView"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/lbl_total_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/num_commande"
+                android:text="Total de la commande"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/commande_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/lbl_total_order"
+                android:layout_alignBottom="@+id/lbl_total_order"
+                android:layout_alignLeft="@+id/date_de_commande"
+                android:text="TextView"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/num_commande"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/commande_price"
+                android:layout_alignTop="@+id/lbl_num_commande"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/lbl_mode_de_paiment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/lbl_total_order"
+                android:text="Mode de paiment"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/lbl_mode_de_paiment"
+                android:layout_alignBottom="@+id/lbl_mode_de_paiment"
+                android:layout_alignLeft="@+id/commande_price"
+                android:text="TextView"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/lbl_detail_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/order_details"
+            android:layout_marginTop="10dp"
+            android:text="Détail sur l&apos;expéditition"
+            android:textSize="17sp" />
+
+        <com.ecommerce.fragments.customer.OrderDetailRelativeView
+            android:id="@+id/p2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lbl_detail_exp"
+            android:background="@drawable/corner_layout_orange"
+            android:padding="5dp" >
+        </com.ecommerce.fragments.customer.OrderDetailRelativeView>
+
+        <RelativeLayout
+            android:id="@+id/address_layout"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/p2"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/corner_layout"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/addr_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date de commande"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/addr_1"
+                android:text="Numéro de commande"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/zip_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/city"
+                android:text="Numéro de commande"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/total_commande_layout"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/address_layout"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/corner_layout"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Article"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/lb_livraison"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/article"
+                android:text="Livraison"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/lb_total_ht"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/lb_livraison"
+                android:text="Total HT"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/lbl_tva"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/lb_total_ht"
+                android:text="Tva"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/lbl_total_de_la_commande"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/lbl_tva"
+                android:text="Total de la commande"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tva"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/total_de_la_commande"
+                android:layout_alignParentRight="true"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/total_de_la_commande"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/lbl_total_de_la_commande"
+                android:layout_alignBottom="@+id/lbl_total_de_la_commande"
+                android:layout_alignRight="@+id/tva"
+                android:text="Small Text"
+                android:textColor="#ce0000"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/tva"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/livraison"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/textView1"
+                android:layout_alignTop="@+id/lb_livraison"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/total_ht"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/tva"
+                android:layout_below="@+id/livraison"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.ecommerce.views.EndlessListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/mLlayout1" >
+    </com.ecommerce.views.EndlessListView>
+
+    <RelativeLayout
+        android:id="@+id/mLlayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <Button
+            android:id="@+id/filter"
+            style="@style/btn_yellow"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="Filtrer"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/nb_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/filter"
+            android:layout_marginLeft="18dp"
+            android:layout_toRightOf="@+id/filter" />
+    </RelativeLayout>
+
+</RelativeLayout>

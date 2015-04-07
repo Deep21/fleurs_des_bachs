@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp" 
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:paddingRight="5dp"
+        android:id="@+id/product_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/libelle_produit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/product_image"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/prix_ttc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/libelle_produit"
+        android:layout_alignBottom="@+id/libelle_produit"
+        android:layout_alignLeft="@+id/stock"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/prix_ttc"
+        android:layout_marginRight="26dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/description_short"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/stock"
+        android:layout_alignBottom="@+id/stock"
+        android:layout_alignLeft="@+id/libelle_produit"
+        android:text="TextView" />
+
+</RelativeLayout>

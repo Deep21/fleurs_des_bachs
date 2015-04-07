@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:padding="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/bl_reference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Réference" />
+
+    <TextView
+        android:id="@+id/lbl_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bl_reference"
+        android:layout_below="@+id/bl_reference"    
+        android:text="Paiement" />
+
+    <TextView
+        android:id="@+id/lbl_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_payment"
+        android:text="Total prix TTC" />
+
+    <TextView
+        android:id="@+id/lbl_date_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_total"
+        android:text="Date d'achat" />
+
+    <TextView
+        android:id="@+id/paiment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ref"
+        android:layout_below="@+id/ref"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/total_ttc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/paiment"
+        android:layout_below="@+id/paiment"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/date_achat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/total_ttc"
+        android:layout_below="@+id/total_ttc"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/order_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_date_order"
+        android:text="Etat de la commande" />
+
+    <TextView
+        android:id="@+id/state_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/date_achat"
+        android:layout_below="@+id/date_achat"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/ref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lbl_payment"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@+id/order_state"
+        android:text="TextView" />
+
+</RelativeLayout>

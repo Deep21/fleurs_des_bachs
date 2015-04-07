@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/lbl_date_de_commande"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date de commande"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/lbl_num_commande"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_date_de_commande"
+        android:text="Numéro de commande"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/date_de_commande"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/num_commande"
+        android:layout_marginLeft="40dp"
+        android:layout_toRightOf="@+id/lbl_num_commande"
+        android:text="TextView"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/lbl_total_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/num_commande"
+        android:text="Total de la commande"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/commande_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_total_order"
+        android:layout_alignBottom="@+id/lbl_total_order"
+        android:layout_alignLeft="@+id/date_de_commande"
+        android:text="TextView"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/num_commande"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/commande_price"
+        android:layout_alignTop="@+id/lbl_num_commande"
+        android:text="TextView" />
+
+    <TextView
+         android:textSize="13sp"
+        android:id="@+id/lbl_mode_de_paiment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_total_order"
+        android:text="Mode de paiment" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_mode_de_paiment"
+        android:layout_alignBottom="@+id/lbl_mode_de_paiment"
+        android:layout_alignLeft="@+id/commande_price"
+        android:text="TextView"
+        android:textSize="13sp" />
+
+</RelativeLayout>
