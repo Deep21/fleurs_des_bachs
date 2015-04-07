@@ -28,4 +28,5 @@ dependencies {
     compile 'com.octo.android.robospice:robospice-retrofit:1.4.14'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
