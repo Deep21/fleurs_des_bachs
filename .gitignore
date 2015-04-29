@@ -1,0 +1,111 @@
+# Created by https://www.gitignore.io
+
+### Prestashop ###
+# Directories content
+cache/class_index.php
+cache/smarty/cache/*
+!cache/smarty/cache/index.php
+cache/smarty/compile/*
+!cache/smarty/compile/index.php
+cache/tcpdf/*
+!cache/tcpdf/index.php
+
+config/xml/*.xml
+config/settings.inc.php
+
+log/*.log
+
+img/*
+!img/index.php
+!img/*/index.php
+
+tools/smarty*/cache/*.php
+!tools/smarty*/cache/index.php
+tools/smarty*/compile/*.php
+!tools/smarty*/compile/index.php
+
+themes/default/cache/*.js
+themes/default/cache/*.css
+
+# Ignore files on root directory
+robots.txt
+sitemap.xml
+
+config/settings.inc.php
+config/xml/*
+cache/smarty/cache/*
+cache/class_index.php
+cache/smarty/compile/*
+cache/cachefs/*
+modules/*/logs/*
+modules/*/tmp/*
+modules/*/pdf/*
+themes/*/cache/*
+download/*
+upload/*
+log/*
+img/*
+.htaccess
+.htpasswd
+sitemap.xml
+modules/*/config.xml
+
+# Created by https://www.gitignore.io
+
+### PhpStorm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+
+*.iml
+
+## Directory-based project format:
+.idea/
+# if you remove the above rule, at least ignore the following:
+
+# User-specific stuff:
+# .idea/workspace.xml
+# .idea/tasks.xml
+# .idea/dictionaries
+
+# Sensitive or high-churn files:
+# .idea/dataSources.ids
+# .idea/dataSources.xml
+# .idea/sqlDataSources.xml
+# .idea/dynamic.xml
+# .idea/uiDesigner.xml
+
+# Gradle:
+# .idea/gradle.xml
+# .idea/libraries
+
+# Mongo Explorer plugin:
+# .idea/mongoSettings.xml
+
+## File-based project format:
+*.ipr
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+
+
+*.md
+cache/*
+.idea/*
+ci/application/logs/*
+log/*.log
+img/tmp/*
+config/xml/*.xml
+

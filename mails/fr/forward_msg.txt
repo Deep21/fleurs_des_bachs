@@ -1,0 +1,12 @@
+[{shop_url}] 
+
+Bonjour {firstname} {lastname},
+
+{employee} souhaite vous transférer une conversation. 
+
+Historique de la conversation : {messages}
+
+{employee} a ajouté "{comment}"
+
+{shop_name} [{shop_url}] propulsé par
+PrestaShop(tm) [http://www.prestashop.com/]
