@@ -61,7 +61,7 @@ class Image extends REST_Controller
             default:
                 $path = $this->getImagesPath($id, NULL);
                 if (file_exists($path)) {
-                    $this->load->library('simpleimage');
+                    $this->load->library('SimpleImage');
                     $this->simpleimage->load($path);
                     if ($this->simpleimage->get_height() >= self::IMG_HEIGHT_LIMIT) {
                         $this->simpleimage->load($path)->fit_to_height(self::IMG_HEIGHT_LIMIT);

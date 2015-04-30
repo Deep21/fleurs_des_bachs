@@ -62,14 +62,13 @@ class Cart extends CartBase
     }
 
     /**
-     *
+     *Permet de créer un nouveau panier
      */
     public function createCart_post()
     {
-
             $this->load->model('Cart_Model');
             $cart['date_add'] = date('Y-m-d H:i:s');
-            $cart['date_upd'] = date('Y-m-d H:i:s');
+            $cart['date_upd'] = $cart['date_add'];
             $cart_model = array(
                 'id_lang' => 2,
                 'date_add' => (string)$cart['date_add'],
@@ -77,7 +76,10 @@ class Cart extends CartBase
 
         if ($id_cart = $this->Cart_Model->addCart($cart_model)) {
             $this->response(array(
-                'cart' => $id_cart), 202);
+                'id_cart' => (int)$id_cart,
+                'date_add'=> (string)$cart['date_add'],
+                'date_upd'=> (string)$cart['date_upd'],
+            ), 202);
         }
     }
 
@@ -245,15 +247,13 @@ class Cart extends CartBase
 
 
     /**
-     * Permet de récupérer les produits contenant dans le panier
+     * Permet de récupérer les produits contenu dans le panier
      * @param int $id_cart l'id du cart
      */
     public function getProductByCartId_get($id_cart = null)
     {
-
         $this->load->model('Product_Model');
         $products = $this->Product_Model->getProductByCartId($id_cart);
-        $cart_array = array();
         $product_array = array();
         foreach ($products as $key => $product) {
             $product_array[] = array(
@@ -268,7 +268,11 @@ class Cart extends CartBase
                 'height' => (double)$product->height,
                 'depth' => (double)$product->depth,
                 'id_supplier' => (int)$product->id_supplier,
-                'id_manufacturer' => (int)$product->id_manufacturer, 'is_virtual' => (int)$product->is_virtual, 'description_short' => $product->description_short, 'available_now' => $product->available_now, 'available_later' => $product->available_later);
+                'id_manufacturer' =>(int)$product->id_manufacturer,
+                'is_virtual' => (int)$product->is_virtual,
+                'description_short' => $product->description_short,
+                'available_now' => $product->available_now,
+                'available_later' => $product->available_later);
         }
         if ($products != null)
             $this->response($product_array, 200);
