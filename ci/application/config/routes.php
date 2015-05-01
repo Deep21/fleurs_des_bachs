@@ -150,7 +150,7 @@ $route['api/cart/add'] = 'api/cart/addCartFirstTime';
 
 $route['api/cart/create'] = 'api/cart/createCart';
 $route['api/cart/(:num)/product/(:num)/attribute/(:num)/address/(:num)/delete'] = 'api/cart/deleteCartProduct/$1/$2/$3/$4';
-$route['api/cart/product/add'] = 'api/cart/insertProductToCartById';
+$route['api/cart/(:num)/product/add'] = 'api/cart/addProductToCart/$1';
 $route['api/cart/(:num)/edit'] = 'api/cart/editCartQty/$1';
 
 $route['api/m/(:num)/get'] = 'api/manufacturer/getProductByManufacturer/$1';

@@ -35,7 +35,6 @@ class Cart extends CartBase
     private function _getLastNoneOrderedCart($id_customer)
     {
         $this->load->model('Cart_Model');
-
         if ($this->Cart_Model->getLastNoneOrderedCart($id_customer) != null) return $this->Cart_Model->getLastNoneOrderedCart($id_customer);
     }
 
@@ -155,17 +154,43 @@ class Cart extends CartBase
         }
     }
 
-
-    public function addProductToTheCart_post()
+    /*Without Cookie*/
+    public function addProductToCart_post($id_cart = null)
     {
-        if ($this->cookie != null) {
+        $cart = $this->post();
+        if (!empty($cart)) {
             $this->load->model('Cart_Model');
-            $id_cart = $this->cookie->customer->id_cart;
-            $cart_product = $this->Cart_Model->getProductByCartId($id_cart);
-            foreach($cart_product as $cp){
+            $id_product = (int)$cart['id_product'];
+            $id_product_attribute = (int)$cart['id_product_attribute'];
+            $clientQty = (int)$cart['quantity'];
 
+            //Permet de récupérer la quantité du produit enregistré dans le panier
+            $cartProductQty = $this->Cart_Model->containsProduct($id_product, $id_product_attribute, $id_cart);
+
+            //Charge les produits disponiblent dans le stock
+            $stock = $this->Cart_Model->getStockById(1, $id_product_attribute, $id_product);
+
+            if ($cartProductQty == 0 && $this->input->get('cart') === 'up' && !empty($stock)) {
+
+                if ($clientQty > (int)$stock->quantity) {
+                    $this->response(array('http_code' => 404, 'error' => true, 'create' => false, 'updated' => false, 'deleted' => false, 'out_of_stock' => true), 404);
+
+                } elseif ($response = $this->Cart_Model->insertProductToCart($id_product, $id_product_attribute, $id_cart, $clientQty)) {
+                    $this->response(array('http_code' => 202, 'error' => false, 'create' => true, 'updated' => false, 'deleted' => false, 'message' => 'Product added to the cart'), 202);
+                }
+
+            } elseif ($cartProductQty > 0 && ((int)$stock->quantity) >= ($cartProductQty + $clientQty) && $this->input->get('cart') === 'up') {
+                $clientQtyUp = '+ ' . (int)$clientQty;
+                $this->Cart_Model->updateQty($id_cart, $id_product_attribute, $id_product, $clientQtyUp);
+                $this->response(array('http_code' => 202, 'error' => false, 'create' => false, 'updated' => true, 'deleted' => false, 'message' => 'Quantity updated'), 202);
             }
-            $this->response(array($cart_product));
+
+            if (($cartProductQty + $clientQty) > (int)$stock->quantity) {
+                $this->response(array('http_code' => 404, 'error' => true, 'create' => false, 'updated' => false, 'deleted' => false, 'out_of_stock' => true), 404);
+            }
+        } else {
+            $this->response(array('http_code' => 404, 'error' => true, 'create' => false, 'updated' => false, 'deleted' => false, 'message' => 'Empty'), 404);
+
         }
     }
 
@@ -275,7 +300,7 @@ class Cart extends CartBase
                 'available_later' => $product->available_later);
         }
         if ($products != null)
-            $this->response($product_array, 200);
+            $this->response(array('cart_product_list'=>$product_array), 200);
 
     }
 

@@ -42,15 +42,14 @@ class CartBase extends REST_Controller
     protected function addCart($auto_add = true)
     {
         $this->load->model('Guest_Model');
-        //Si auto load vaut true
-        if ($auto_add) {
+        //Si auto auto add vaut true
+        if ($auto_add ==  true) {
             //On vérifie si il n'y a pas de cookie qui existe
             if ($this->cookie == null) {
                 Debugger::log('cookie == null');
                 //on créer un nouveau guest
                 $id_guest = $this->Guest_Model->setNewGuest();
                 $cart = array(
-                    'id_cart' => null,
                     'id_shop_group' => 1,
                     'id_shop' => 1,
                     'id_address_delivery' => 0,
@@ -95,8 +94,31 @@ class CartBase extends REST_Controller
                     'expire' => 3200, '', true
                 );
                 set_cookie($cookie);
-                return $id_cart;
+                return (int)$id_cart;
             }
+        }else{
+            $id_guest = $this->Guest_Model->setNewGuest();
+            $date_add = date('Y-m-d H:i:s');
+            $cart_model = array(
+                'id_cart' => null,
+                'id_shop_group' => 1,
+                'id_shop' => 1,
+                'id_address_delivery' => 0,
+                'id_address_invoice' => 0,
+                'id_currency' => 1,
+                'id_customer' => 0,
+                'id_guest' => $id_guest,
+                'id_lang' => 2,
+                'gift_message' => '',
+                'mobile_theme' => 0,
+                'secure_key' => '',
+                'delivery_option' => '',
+                'date_add' => $date_add,
+                'date_upd' => $date_add,
+            );
+            // Création d'un nouveau panier
+            $id_cart = $this->cart_model->addCart($cart_model);
+            return (int)$id_cart;
         }
 
     }

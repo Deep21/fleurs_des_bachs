@@ -128,9 +128,9 @@ class Cart_Model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    public function addCart($cart)
+    public function addCart($cart_model)
     {
-        $this->db->insert(self::$table, $cart);
+        $this->db->insert(self::$table, $cart_model);
         return $this->db->insert_id();
     }
 

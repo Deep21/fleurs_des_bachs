@@ -100,6 +100,7 @@ class Category extends REST_Controller
             $product[] = array(
                 'id_product' => (int)$data->id_product,
                 'id_image' => (int)$data->id_image,
+                'url_image' => (string)'http://142.4.211.181/dwickrema/prestashop.v1/ci/index.php/api/image/' . (int)$data->id_image . '/get',
                 'in_stock' => ($data->id_product_attribute) ? (int)$this->Stock_Available_Model->getStockAvaible($data->id_product_attribute)->stock : ($data->quantity),
                 'id_supplier' => (int)$data->id_supplier,
                 'id_manufacturer' => (int)$data->id_manufacturer,

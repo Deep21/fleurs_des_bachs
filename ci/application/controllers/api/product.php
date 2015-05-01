@@ -77,6 +77,7 @@ class Product extends REST_Controller
                     $product->nouveau = (int)$product->nouveau;
                     $product->id_product = (int)$product->id_product;
                     $product->id_image = (int)$product->id_image;
+                    $product->url_image = (string)'http://142.4.211.181/dwickrema/prestashop.v1/ci/index.php/api/image/' . (int)$images->id_image . '/get';
                     $product->id_manufacturer = (int)$product->id_manufacturer;
                     $product->id_category_default = (int)$product->id_category_default;
                     $product->id_supplier = (int)$product->id_supplier;
