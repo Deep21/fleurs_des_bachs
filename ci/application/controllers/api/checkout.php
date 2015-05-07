@@ -9,6 +9,7 @@ class Checkout extends REST_Controller implements ConfigurationListner
 {
 
     const PS_SHIPPING_HANDLING = 0;
+
     public $shipping_constants = array(
         'ps_shipping_free_price',
         'ps_shipping_free_weight',
@@ -17,6 +18,7 @@ class Checkout extends REST_Controller implements ConfigurationListner
         'ps_tax_display',
         'ps_tax',
         );
+
     private $cookie;
 
     /**

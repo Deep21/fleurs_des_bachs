@@ -110,6 +110,7 @@ $route['api/manufacturers/get/all'] = 'api/manufacturer/getManufacturers';
 
 
 //Address routs
+$route['api/address/get'] = 'api/address/getAllAddress';
 $route['api/address/customer/(:num)/get'] = 'api/address/getAddressById/$1';
 $route['api/address/(:num)/delete'] = 'api/address/deleteAddressById/$1';
 $route['api/address/(:num)/edit'] = 'api/address/editAddressById/$1';
@@ -137,21 +138,32 @@ $route['api/image/get'] = 'api/image/getAllImages';
 //Image routs
 
 //Checkout routs
-$route['api/cart/checkout/get'] = 'api/checkout/getCheckout';
+
 $route['api/image/get'] = 'api/image/getAllImages';
 //Checkout routs
 
+//Cart routs
+$route['api/cart/checkout/get'] = 'api/checkout/getCheckout';
 $route['api/cart/customer/(:num)/get'] = 'api/cart/getLastNoneOrderedCart/$1';
 $route['api/cart/get'] = 'api/cart/getCartProduct';
 $route['api/cart/(:num)/product/get'] = 'api/cart/getProductByCartId/$1';
 $route['api/cart/customer/cart/product/get'] = 'api/cart/getLastCartProductByCustomer/$1';
 $route['api/cart/add'] = 'api/cart/addCartFirstTime';
-
-
+$route['api/cart/(:num)/customer'] = 'api/cart/mergeIdCartWithCustomer/$1';
 $route['api/cart/create'] = 'api/cart/createCart';
 $route['api/cart/(:num)/product/(:num)/attribute/(:num)/address/(:num)/delete'] = 'api/cart/deleteCartProduct/$1/$2/$3/$4';
 $route['api/cart/(:num)/product/add'] = 'api/cart/addProductToCart/$1';
+$route['api/cart/product/add'] = 'api/cart/insertProductToCartById/$1';
 $route['api/cart/(:num)/edit'] = 'api/cart/editCartQty/$1';
+//Cart routs
+
+//Carrier routs
+$route['api/carrier/get'] = 'api/carrier/getCustomerCarrier';
+//Carrier routs
+
+
+
+//Cart routs
 
 $route['api/m/(:num)/get'] = 'api/manufacturer/getProductByManufacturer/$1';
 $route['api/m/(:num)/get/(:num)'] = 'api/manufacturer/getProductByManufacturer/$1/$2';

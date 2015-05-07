@@ -5,8 +5,6 @@ require_once(dirname(__FILE__) . '/../../../config/settings.inc.php');
 
 OAuth2\Autoloader::register();
 
-use Tracy\Debugger;
-
 
 class Oauth
 {
@@ -17,7 +15,7 @@ class Oauth
 
     public function __construct()
     {
-
+        
         $this->ci_instance = &get_instance();
         $this->ci_instance->load->model('Cart_Model');
         $this->ci_instance->load->library('encrypt');
@@ -65,12 +63,17 @@ class Oauth
     public function getAccessToken()
     {
         $this->ci_instance->load->model('Token_model');
-        $tokenModel = $this->ci_instance->Token_model;
-        $response = $this->server->handleTokenRequest(OAuth2\Request::createFromGlobals());
+        $tokenModel   = $this->ci_instance->Token_model;
+        $response     = $this->server->handleTokenRequest(OAuth2\Request::createFromGlobals());
         $access_token = $response->getParameter('access_token');
-        $customer = $tokenModel->getUserIdByToken($access_token);
-        $this->_setCookie($customer);
-        $response->send();
+        $customer     = $tokenModel->getUserIdByToken($access_token);
+        try{
+            $this->_setCookie($customer);
+            $response->send();
+        }catch(Exception $e){
+           print_r ($e->getMessage());
+           exit;
+        }
     }
 
     private function _setCookie($customer)
@@ -81,8 +84,7 @@ class Oauth
         $this->ci_instance->load->library('encrypt');
         $this->ci_instance->load->helper('cookie');
         $this->ci_instance->encrypt->set_cipher(MCRYPT_BLOWFISH);
-
-        try {
+      
             //si un client existe on rentre dans la condition
             if (!empty($customer)) {
                 //on vérifie si le client possède un id_cart
@@ -114,8 +116,10 @@ class Oauth
                         'date_add' => date('Y-m-d H:i:s'),
                         'date_upd' => date('Y-m-d H:i:s'),
                     );
+
                     //on créer un id_cart et on insere dans la base de donnée
                     $id_cart = $this->ci_instance->Cart_Model->addCart($cart);
+
                 } elseif (!empty($cart))
                     $id_cart = (int)$cart['id_cart'];
 
@@ -140,6 +144,7 @@ class Oauth
                     }
 
                 }
+
                 $cookie_data = array(
                     "prestashop_config" => array(
                         'id_lang' => 2,
@@ -159,19 +164,18 @@ class Oauth
                 );
                 $cookie_encoded = json_encode($cookie_data);
                 $encrypted_cookie = $this->ci_instance->encrypt->encode($cookie_encoded);
-                $cookie = array('name' => 'prestashop_ci', 'value' => $encrypted_cookie, 'path' => '/prestashop_test/', 'expire' => 3200, '', true);
-
+                $cookie = array(
+                    'name' => 'prestashop_ci', 
+                    'value' => $encrypted_cookie, 
+                    'path' => '/prestashop_test/', 
+                    'expire' => $this->ci_instance->config->item('sess_expiration'), '', true);
+              
                 set_cookie($cookie);
 
             } else {
                 throw new Exception('Identification échoué / Client non trouvé');
             }
-        } catch (Exception $e) {
-
-            Debugger::log($e->getMessage());
-        }
-
-
+        
     }
 }
 

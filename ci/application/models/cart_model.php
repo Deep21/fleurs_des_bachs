@@ -109,7 +109,7 @@ class Cart_Model extends CI_Model
             ->join('product_attribute_shop product_attribute_shop', 'product_attribute_shop.id_shop = cp.id_shop AND product_attribute_shop.id_product_attribute = pa.id_product_attribute', 'left')
             ->join('product_attribute_image pai', 'pai.id_product_attribute = pa.id_product_attribute', 'left')
             ->join('image_lang il', 'il.id_image = pai.id_image AND il.id_lang = 1', 'left')
-            ->where('cp.id_cart', $id_cart)
+            ->where('cp.id_cart', (int)$id_cart)
             ->where('stock.id_product_attribute', "IFNULL(cp.id_product_attribute, 0)")
             ->group_by('unique_id')
             ->order_by('p.id_product asc, cp.id_product_attribute asc, cp.date_add asc')
@@ -118,10 +118,11 @@ class Cart_Model extends CI_Model
     }
 
     public function mergeIdCartWithCustomer($customer, $id_cart){
+
         $this->db->where('id_cart', (int)$id_cart);
         $this->db->update('cart', array(
-            'id_customer' =>(int) $customer->id_customer,
-                'secure_key' =>(string) $customer->secure_key,
+                'id_customer' =>(int)$customer->id_customer,
+                'secure_key' =>$customer->secure_key,
                 'date_upd' => date('Y-m-d H:i:s'),
             )
         );
@@ -212,20 +213,6 @@ class Cart_Model extends CI_Model
         }
     }
 
-    public function updateQtys($id_cart, $id_product_attribute, $id_product, $qty)
-    {
-        $this->db->where('id_cart', $id_cart);
-        $this->db->where('id_product', $id_product);
-        $this->db->where('id_product_attribute', $id_product_attribute);
-        $this->db->limit(1);
-        $this->db->set('quantity', $qty, false);
-        $this->db->set('date_add', 'NOW()', false);
-        $this->db->update('cart_product');
-        if ($affected_rows = $this->db->affected_rows() > 0) {
-            $this->updateDate($id_cart);
-            return $affected_rows;
-        }
-    }
 
     public function getStockById($id_shop, $id_product_attribute, $id_product)
     {
@@ -309,11 +296,7 @@ class Cart_Model extends CI_Model
     }
 
     public function getAddressByIdCart($id_cart){
-
-        return $this->db->get_where(self::$table, array(
-            'id_cart' => $id_cart,
-            )
-        )->first_row('Cart_Model');
+        return $this->db->get_where(self::$table, array('id_cart' => $id_cart))->first_row('Cart_Model');
 
     }
 

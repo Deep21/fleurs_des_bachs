@@ -52,5 +52,3 @@ class Customer_model extends CI_Model
             ->result('Customer_model');
     }
 }
-
-?>

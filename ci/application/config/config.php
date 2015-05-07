@@ -250,7 +250,7 @@ $config['encryption_key'] = _COOKIE_KEY_;
 |
 */
 $config['sess_cookie_name']		= 'ci';
-$config['sess_expiration']		= 3200;
+$config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;

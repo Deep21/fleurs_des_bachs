@@ -21,24 +21,32 @@ class Address_Model extends CI_Model
 
     }
 
+    /**
+     * @param int $id_adress
+     * @param bool $active
+     * @return Address_Model
+     */
     public function getAddressById($id_adress, $active = true)
     {
         return $this->db->select('a.id_address, a.alias, a.company, a.lastname, a.firstname, a.address1, a.address2, a.postcode, a.city, a.phone, a.phone_mobile')
             ->from('address a')
-            ->where('a.id_address', $id_adress)
+            ->where('a.id_address', (int )$id_adress)
             ->where('a.active', ($active) ? 1 : 0)
             ->where('a.deleted', 0)
             ->get()
-            ->result('Address_Model');
-
+            ->first_row('Address_Model');
     }
 
 
+    /**
+     * @param int $id_customer
+     * @return Address_Model
+     */
     public function getAddressByCustomerId($id_customer)
     {
         return $this->db->select('a.id_address, a.alias, a.company, a.lastname, a.firstname, a.address1, a.address2, a.postcode, a.city, a.phone, a.phone_mobile')
             ->from('address a')
-            ->where('a.id_customer', $id_customer)
+            ->where('a.id_customer', (int) $id_customer)
             ->where('a.active', self::active)
             ->get()
             ->result('Address_Model');

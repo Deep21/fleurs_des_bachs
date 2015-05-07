@@ -27,22 +27,30 @@ class Address extends REST_Controller
 
     }
 
+
     /**
-     * Get address by id
+     * @param null $id
      */
     public function getAddressById_get($id = null)
     {
-
+        //$this->oauth->verifyResourceRequest();
+        $this->load->model('Address_Model');
+        $address = $this->Address_Model->getAddressByCustomerId($id);
+        $this->response($address, 200);
     }
 
 
     /**
-     * Get the total address of the customer
-     * @return
+     *Fonction qui renvoie les deux addresses
      */
     public function getAllAddress_get()
     {
-
+        $this->load->model('Address_Model');
+        $this->load->model('Carrier_Model');
+        $carrierList  = $this->Carrier_Model->getCarriers();
+        $address_invoice  = $this->Address_Model->getAddressById(7);
+        $address_delivery = $this->Address_Model->getAddressById(7);
+        $this->response(array('address'=>array($address_invoice, $address_delivery), 'carrier'=> $carrierList) , 200);
     }
 
 
@@ -54,14 +62,13 @@ class Address extends REST_Controller
     {
         //load the auth library
 
-
         //check if we're logged
-        if ($this->auth->isLogged()) {
+        //$this->oauth->verifyResourceRequest();
 
             //retrieve the post value sent by the client
             //param is address_add
             $address = $this->post('address_add');
-            if ($address) {
+            if (!empty($address)) {
                 foreach ($address as $key => $value) {
                     isset($value['company']) ? $_POST['company'] = $value['company'] : null;
                     isset($value['id_customer']) ? $_POST['id_customer'] = $value['id_customer'] : null;
@@ -76,7 +83,7 @@ class Address extends REST_Controller
             } else {
                 $this->response(array('message' => "empty"), 404);
             }
-            if ($this->form_validation->run('address_add')) {
+            if ($this->form_validation->run('address_add') == true) {
                 $now = date('Y-m-d H:i:s');
                 $this->load->model('Address_model');
                 $address = $this->Address_model;
@@ -99,7 +106,7 @@ class Address extends REST_Controller
                 $this->response(array($this->router->class => array('message' => validation_errors())), 404);
             }
         }
-    }
+
 
 
     /**
@@ -109,15 +116,10 @@ class Address extends REST_Controller
      */
     public function editAddressById_put($id_address)
     {
-
-        //load the auth library
-
-        $this->load->library('auth');
         $this->load->library('my_form_validation');
 
         //check if we're logged
         if ($this->auth->isLogged()) {
-
             //retrieve the post value sent by the client
             //param is addres_put
             $address = $this->put('address_put');
@@ -183,5 +185,3 @@ class Address extends REST_Controller
 
 
 }
-
-?>

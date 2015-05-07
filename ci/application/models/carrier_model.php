@@ -5,32 +5,47 @@ class Carrier_Model extends CI_Model
 {
     public $default_carrier;
 
+    /**
+     *
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
+    /**
+     * @return mixed
+     */
     public function getCarriers()
     {
-        return $this->db->select('c.*,d.*')
+        return $this->db->select('c.*, d.*, cl.*')
             ->from('carrier c')
-            ->join('delivery d', 'd.id_carrier = c.id_carrier', 'left')
+            ->join('delivery d', 'd.id_carrier = c.id_carrier', 'inner')
+            ->join('carrier_lang cl', 'cl.id_carrier = c.id_carrier', 'inner')
             ->where('c.active', 1)
             ->where('c.deleted', 0)
+            ->group_by('c.id_carrier')
             ->get()
             ->result('Carrier_Model');
-
     }
 
+    /**
+     * @param  array $ids
+     * @return mixed
+     */
     public function getCarrierTaxGroup($ids)
     {
         return $this->db->select('ctg.*')
             ->from('carrier_tax_rules_group_shop ctg')
-            ->where_in('ctg.id_carrier', $ids)
+            ->where_in('ctg.id_carrier', (array) $ids)
             ->get()
             ->result('Carrier_Model');
     }
 
+    /**
+     * @param $id_tax_rules_group
+     * @return mixed
+     */
     public function getCarrierTax($id_tax_rules_group)
     {
         return $this->db->select('tr.*,ta.*')
