@@ -144,8 +144,10 @@ class Checkout extends REST_Controller implements ConfigurationListner
     private function _getDefaultDelivery($carriers, $id_carrier_default, $use_tax = false)
     {
         $default_delivery = array();
-        foreach ($carriers as $delivers) $default_delivery[$delivers->id_carrier] = $delivers;
-        if (array_key_exists($id_carrier_default, $default_delivery)) return $default_delivery[$id_carrier_default];
+        foreach ($carriers as $delivers)
+            $default_delivery[$delivers->id_carrier] = $delivers;
+        if (array_key_exists($id_carrier_default, $default_delivery))
+            return $default_delivery[$id_carrier_default];
     }
 
     private function _getProductDetails($id_cart)

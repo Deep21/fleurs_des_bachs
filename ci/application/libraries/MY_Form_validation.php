@@ -4,41 +4,25 @@ class MY_Form_validation extends CI_Form_validation
 {
     public $pwd;
 
-    function __construct($config = array())
+    public function __construct($config = array())
     {
         parent::__construct($config);
-
-    }
-
-
-    /**
-     * Check the birthDate validity
-
-        $this->setErrors();
-    }
-
-
-    private function setErrors()
-    {
 
     }
 
     /**
      * Check for birthDate validity
      *
-
+     *
      * @param string $date birthdate to validate
      * @return boolean Validity is ok or not
      */
     public static function isBirthDate($date)
     {
 
-
-        if (empty($date) || $date == '0000-00-00') {
+        if (empty($date) || $date == '0000-00-00') 
             return true;
-        }
-
-
+        
         if (empty($date) || $date == '0000-00-00')
             return true;
 
@@ -164,7 +148,7 @@ class MY_Form_validation extends CI_Form_validation
     }
 
     /**
-
+     *
      * Check for city name validity
      *
      * @param string $city City name to validate

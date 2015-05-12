@@ -50,122 +50,134 @@ class Address extends REST_Controller
         $carrierList  = $this->Carrier_Model->getCarriers();
         $address_invoice  = $this->Address_Model->getAddressById(7);
         $address_delivery = $this->Address_Model->getAddressById(7);
-        $this->response(array('address'=>array($address_invoice, $address_delivery), 'carrier'=> $carrierList) , 200);
+        $this->response(array(
+            'address_invoice' => $address_invoice,
+            'address_delivery' => $address_delivery,
+            'carrier' => $carrierList
+        ), 200);
     }
 
 
     /**
+     * POST
      * Add new address
      */
-
     public function addAddress_post()
     {
         //load the auth library
-
         //check if we're logged
         //$this->oauth->verifyResourceRequest();
+        //retrieve the post value sent by the client
+        $this->load->library('form_validation');
 
-            //retrieve the post value sent by the client
-            //param is address_add
-            $address = $this->post('address_add');
-            if (!empty($address)) {
-                foreach ($address as $key => $value) {
-                    isset($value['company']) ? $_POST['company'] = $value['company'] : null;
-                    isset($value['id_customer']) ? $_POST['id_customer'] = $value['id_customer'] : null;
-                    isset($value['address']) ? $_POST['address'] = $value['address'] : null;
-                    isset($value['postcode']) ? $_POST['postcode'] = $value['postcode'] : null;
-                    isset($value['city']) ? $_POST['city'] = $value['city'] : null;
-                    isset($value['id_country']) ? $_POST['id_country'] = $value['id_country'] : null;
-                    isset($value['phone']) ? $_POST['phone'] = $value['phone'] : null;
-                    isset($value['phone_mobile']) ? $_POST['phone_mobile'] = $value['phone_mobile'] : null;
-                    isset($value['alias']) ? $_POST['alias'] = $value['alias'] : null;
-                }
-            } else {
-                $this->response(array('message' => "empty"), 404);
-            }
-            if ($this->form_validation->run('address_add') == true) {
-                $now = date('Y-m-d H:i:s');
-                $this->load->model('Address_model');
-                $address = $this->Address_model;
-                $address->company = $value['company'];
-                $address->id_customer = $value['id_customer'];
-                $address->address1 = $value['address'];
-                $address->postcode = $value['postcode'];
-                $address->city = $value['city'];
-                $address->id_country = $value['id_country'];
-                $address->phone = $value['phone'];
-                $address->phone_mobile = $value['phone_mobile'];
-                $address->alias = $value['alias'];
-                $address->date_add = $now;
-                $address->date_upd = $now;
-                $address->active = 1;
-                if ($address->addAddress($address))
-                    $this->response(array($this->router->class => array('status' => 'Adresse ajoutée avec succès')), 200);
+        $address = $this->post();
+
+        if (!empty($address)) {
+            isset($address['company']) ? $_POST['company'] = $address['company'] : null;
+            isset($address['id_customer']) ? $_POST['id_customer'] = $address['id_customer'] : null;
+            isset($address['firstname']) ? $_POST['firstname'] = $address['firstname'] : null;
+            isset($address['lastname']) ? $_POST['lastname'] = $address['lastname'] : null;
+            isset($address['address']) ? $_POST['address'] = $address['address'] : null;
+            isset($address['postcode']) ? $_POST['postcode'] = $address['postcode'] : null;
+            isset($address['city']) ? $_POST['city'] = $address['city'] : null;
+            isset($address['phone']) ? $_POST['phone'] = $address['phone'] : null;
+            isset($address['phone_mobile']) ? $_POST['phone_mobile'] = $address['phone_mobile'] : null;
+            isset($address['alias']) ? $_POST['alias'] = $address['alias'] : null;
 
             } else {
-                $this->response(array($this->router->class => array('message' => validation_errors())), 404);
+            $this->response(array('message' => "empty"), 200);
             }
-        }
 
+        if ($this->form_validation->run('address_add') == true) {
+            $now = date('Y-m-d H:i:s');
 
+            $this->load->model('Address_model');
+            $address_model = $this->Address_model;
+            $address_model->lastname = $address['firstname'];
+            $address_model->firstname = $address['lastname'];
+            $address_model->company = $address['company'];
+            $address_model->id_customer = $address['id_customer'];
+            $address_model->address1 = $address['address'];
+            $address_model->postcode = $address['postcode'];
+            $address_model->city = $address['city'];
+            $address_model->phone = $address['phone'];
+            $address_model->phone_mobile = $address['phone_mobile'];
+            $address_model->alias = $address['alias'];
+            $address_model->date_add = $now;
+            $address_model->date_upd = $now;
 
+            if ($address_model->addAddress() > 0)
+                $this->response(array(
+                    'http_code' => 200,
+                    'error' => false,
+                    'create' => true,
+                    'updated' => false,
+                    'deleted' => false), 200);
+
+            } else {
+            $this->response(array($this->router->class => array('message' => validation_errors())), 200);
+            }
+
+    }
     /**
      * Edit the adress of the customer by id address
      * @param $id_address address of the customer
      * @return boolean
      */
-    public function editAddressById_put($id_address)
+    public function editAddressById_put($id_address = null)
     {
-        $this->load->library('my_form_validation');
+        $this->load->library('form_validation');
+        //retrieve the post value sent by the client
+        //param is addres_put
 
-        //check if we're logged
-        if ($this->auth->isLogged()) {
-            //retrieve the post value sent by the client
-            //param is addres_put
-            $address = $this->put('address_put');
-            if ($address) {
-                foreach ($address as $key => $value) {
-                    isset($value['company']) ? $_POST['company'] = $value['company'] : null;
-                    isset($value['id_customer']) ? $_POST['id_customer'] = $value['id_customer'] : null;
-                    isset($value['address']) ? $_POST['address'] = $value['address'] : null;
-                    isset($value['postcode']) ? $_POST['postcode'] = $value['postcode'] : null;
-                    isset($value['city']) ? $_POST['city'] = $value['city'] : null;
-                    isset($value['id_country']) ? $_POST['id_country'] = $value['id_country'] : null;
-                    isset($value['phone']) ? $_POST['phone'] = $value['phone'] : null;
-                    isset($value['phone_mobile']) ? $_POST['phone_mobile'] = $value['phone_mobile'] : null;
-                    isset($value['alias']) ? $_POST['alias'] = $value['alias'] : null;
-                }
+        $address = $this->put();
+
+        if (!empty($address)) {
+            isset($address['company']) ? $_POST['company'] = $address['company'] : null;
+            isset($address['firstname']) ? $_POST['firstname'] = $address['firstname'] : null;
+            isset($address['lastname']) ? $_POST['lastname'] = $address['lastname'] : null;
+            isset($address['address']) ? $_POST['address'] = $address['address'] : null;
+            isset($address['postcode']) ? $_POST['postcode'] = $address['postcode'] : null;
+            isset($address['city']) ? $_POST['city'] = $address['city'] : null;
+            isset($address['phone']) ? $_POST['phone'] = $address['phone'] : null;
+            isset($address['phone_mobile']) ? $_POST['phone_mobile'] = $address['phone_mobile'] : null;
+            isset($address['alias']) ? $_POST['alias'] = $address['alias'] : null;
+
             } else {
-                $this->response(array('message' => "empty"), 404);
+            $this->response(array('message' => "empty"), 200);
             }
 
             //check the validition rules
-            if ($this->form_validation->run('address_put')) {
-                $now = date('Y-m-d H:i:s');
-                $this->load->model('Address_model');
-                $address = $this->Address_model;
-                $address->company = $value['company'];
-                $address->id_customer = $value['id_customer'];
-                $address->address1 = $value['address'];
-                $address->postcode = $value['postcode'];
-                $address->city = $value['city'];
-                $address->id_country = $value['id_country'];
-                $address->phone = $value['phone'];
-                $address->phone_mobile = $value['phone_mobile'];
-                $address->alias = $value['alias'];
-                $address->date_add = $now;
-                $address->date_upd = $now;
-                $address->active = 1;
-                if ($address->updateAddressById($address, $id_address)) {
-                    $this->response(array($this->router->class => array('status' => 'Adresse modifié avec succès')), 200);
+        if ($this->form_validation->run('address_put') == true) {
+            $now = date('Y-m-d H:i:s');
+            $this->load->model('Address_model');
+            $address_model = $this->Address_model;
+            $address_model->lastname = $address['firstname'];
+            $address_model->firstname = $address['lastname'];
+            $address_model->company = $address['company'];
+            $address_model->id_address = $id_address;
+            $address_model->id_customer = 2;
+            $address_model->address1 = $address['address'];
+            $address_model->postcode = $address['postcode'];
+            $address_model->city = $address['city'];
+            $address_model->phone = $address['phone'];
+            $address_model->phone_mobile = $address['phone_mobile'];
+            $address_model->alias = $address['alias'];
+            $address_model->date_add = $now;
+            $address_model->date_upd = $now;
+
+            if ($address_model->updateByAddressId() > 0) {
+
+                $this->response(array('status' => 'Adresse modifié avec succès'), 200);
+
                 } else {
-                    $this->response(array($this->router->class => array('status' => 'error')), 404);
+                $this->response(array('status' => 'error'), 200);
                 }
 
             } else {
-                $this->response(array($this->router->class => array('message' => validation_errors())), 404);
+            $this->response(array('message' => validation_errors()), 200);
             }
-        }
+
     }
 
 
@@ -175,12 +187,15 @@ class Address extends REST_Controller
      * @return boolean
      */
 
-    public function deleteAddressById_delete($id = null)
+    public function deleteAddressById_delete($id_address = null)
     {
         $this->load->model('Address_model');
-        $address = $this->Address_model;
-        $address->id_address = $id;
-        $address->deleteAddressById($address);
+        $address_model = $this->Address_model;
+        $address_model->id_address = $id_address;
+        if ($address_model->deleteAddressById() > 0) {
+            $this->response(array('status' => 'Deleted'), 200);
+        }
+
     }
 
 
