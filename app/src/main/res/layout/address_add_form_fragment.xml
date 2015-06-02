@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true" >
+
+   <!--  <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/label_ville"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/cp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/cp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:text="Ville"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/label_tel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ville"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ville"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:text="Téléphone"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/tel_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editText1"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editText1"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="16dp"
+            android:text="Téléphone mobile"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <Button
+            style="@style/btn_yellow"
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/telephone_mobile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="Enregistrer" />
+
+        <TextView
+            android:id="@+id/label_adresse_un"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/label_prenom"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/prenom"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="26dp"
+            android:text="Adresse 1"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/label_adresse_deux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/label_adresse_un"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/adresse_un"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="18dp"
+            android:text="Adresse 2"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/label_cp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/label_adresse_deux"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/adresse_deux"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:text="Code postal"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/ville"
+            style="@style/editText"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="false"
+            android:layout_below="@+id/label_ville"
+            android:layout_centerInParent="true"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/adresse_deux"
+            style="@style/editText"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/nom"
+            android:layout_below="@+id/label_adresse_deux"
+            android:layout_centerInParent="true"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/nom"
+            style="@style/editText"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/label_nom"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="false"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/label_nom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ajouter_addresse"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:text="Nom"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/label_prenom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/nom"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:text="Prénom"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/prenom"
+            style="@style/editText"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/label_prenom"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/label_nom"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/adresse_un"
+            style="@style/editText"
+            android:layout_width="264dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/label_adresse_un"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/label_nom"
+            android:ems="10"
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/editText1"
+            style="@style/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/cp"
+            android:layout_below="@+id/label_tel"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/telephone_mobile"
+            style="@style/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/editText1"
+            android:layout_below="@+id/tel_mobile"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/cp"
+            style="@style/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/label_cp"
+            android:layout_below="@+id/label_cp"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:inputType="numberSigned" />
+
+        <TextView
+            android:id="@+id/ajouter_addresse"
+            style="@style/h1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/ajouter_addresse" />
+
+    </RelativeLayout>
+ -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/ajouter_addresse"
+            style="@style/h1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            
+          
+            android:text="@string/ajouter_addresse" />
+
+        <TextView
+            android:id="@+id/nom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom"
+            android:layout_marginLeft="35dp"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/editText1"
+            style="@style/editText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/prenom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="Prénom"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/EditText01"
+            style="@style/editText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/adresse_un"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="Adresse un"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/EditText02"
+            style="@style/editText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/adresse_deux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="Adresse 2"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/EditText03"
+            style="@style/editText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/cp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="Code postal"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/code_postale"
+            style="@style/editText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:inputType="number" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/lb_ville"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="Ville"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/ville"
+            style="@style/editText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/lb_tel_fix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="Téléphone fixe"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/tel_fixe"
+            style="@style/editText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/lb_tel_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="Téléphone mobile"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/telephone_mobile"
+            style="@style/editText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:inputType="number" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/save"
+            style="@style/btn_yellow"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="Sauvegarder" />
+
+    </LinearLayout>
+
+</ScrollView>

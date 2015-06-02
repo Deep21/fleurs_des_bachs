@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mLlayout1" >
+    </ListView>
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:id="@+id/mLlayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:textSize="14sp"
+            android:id="@+id/order"
+            style="@style/btn_yellow"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:text="Commander" />
+
+        <TextView
+            android:id="@+id/qte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/prix_ttc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/qte"
+            android:layout_below="@+id/qte"
+            android:text="TextView" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

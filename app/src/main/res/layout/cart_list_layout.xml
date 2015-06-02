@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/product_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:src="@drawable/abc_btn_switch_to_on_mtrl_00001" />
+
+    <TextView
+        android:id="@+id/libelle_produit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/product_image"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/product_image"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/description_short"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/libelle_produit"
+        android:layout_below="@+id/libelle_produit"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/prix_ttc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/description_short"
+        android:layout_below="@+id/description_short"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/prix_ttc"
+        android:layout_below="@+id/prix_ttc"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btn_qte"
+        style="@style/btn_product"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/stock"
+        android:layout_below="@+id/stock"
+        android:layout_marginTop="10dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="Quantité"
+        android:textSize="10sp" />
+
+    <Button
+        android:id="@+id/delete_product"
+        style="@style/btn_product"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignBaseline="@+id/btn_qte"
+        android:layout_alignBottom="@+id/btn_qte"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/btn_qte"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="Supprimer"
+        android:textSize="10sp" />
+
+</RelativeLayout>
