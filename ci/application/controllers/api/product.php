@@ -37,9 +37,7 @@ class Product extends REST_Controller
 
 
     /**
-     * Retrieve Product by id product
-     * @param $id_order the id of order
-     * @return
+     * @param int id_product
      */
     public function getProductById_get($id_product = null)
     {

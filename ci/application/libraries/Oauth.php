@@ -4,7 +4,7 @@ require_once('OAuth2/Autoloader.php');
 require_once(dirname(__FILE__) . '/../../../config/settings.inc.php');
 
 OAuth2\Autoloader::register();
-
+use Tracy\Debugger;
 
 class Oauth
 {
@@ -71,8 +71,8 @@ class Oauth
             $this->_setCookie($customer);
             $response->send();
         }catch(Exception $e){
-           print_r ($e->getMessage());
-           exit;
+            Debugger::log('Oauth'.$e->getMessage());
+
         }
     }
 
@@ -87,8 +87,9 @@ class Oauth
       
             //si un client existe on rentre dans la condition
             if (!empty($customer)) {
+
                 //on vérifie si le client possède un id_cart
-                //getLastNoneOrderedCart retourne un tableau contenant les informations du panier
+                //getLastNoneOrderedCart retourne un tableau contenant le dernier id_cart du client
                 $cart = $cart->getLastNoneOrderedCart((int)$customer->id_customer);
 
                 if (empty($cart) && !empty($this->cookie->customer->id_cart)) {
@@ -175,7 +176,18 @@ class Oauth
             } else {
                 throw new Exception('Identification échoué / Client non trouvé');
             }
-        
+    }
+
+    public function getCustomer(){
+        if($this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())== true){
+            $this->ci_instance->load->model('Token_model');
+            $tokenModel   = $this->ci_instance->Token_model;
+            $data = OAuth2\Request::createFromGlobals();
+            $token = explode("Bearer ", $data->headers['AUTHORIZATION']);
+            return $tokenModel->getUserIdByToken($token[1]);
+
+        }
+
     }
 }
 

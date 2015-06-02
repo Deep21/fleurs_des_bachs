@@ -53,7 +53,6 @@ class Cart_Model extends CI_Model
 
     public function getProductByCartId($id_cart)
     {
-
         return $this->db->select('
       pa.ecotax as pa_eco_tax,
       pa.price as pa_price,
@@ -118,7 +117,6 @@ class Cart_Model extends CI_Model
     }
 
     public function mergeIdCartWithCustomer($customer, $id_cart){
-
         $this->db->where('id_cart', (int)$id_cart);
         $this->db->update('cart', array(
                 'id_customer' =>(int)$customer->id_customer,

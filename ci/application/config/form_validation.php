@@ -4,11 +4,6 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 $config = array(
     'address_add' => array(
         array(
-            'field' => 'company',
-            'label' => 'company',
-            'rules' => 'required'
-        ),
-        array(
             'field' => 'address',
             'label' => 'address',
             'rules' => 'required|trim|xss_clean'

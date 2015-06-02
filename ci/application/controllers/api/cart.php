@@ -23,23 +23,23 @@ class Cart extends CartBase implements ConfigurationListner
 
 
     /**
-     * @param $id_cart
-     * @param $id_customer
+     * @param int id_cart
      */
-    public function mergeIdCartWithCustomer_get($id_cart, $id_customer)
+    public function mergeIdCartWithCustomer_post($id_cart = null)
     {
-        $this->oauth->verifyResourceRequest();
-        $this->load->model('Cart_Model');
-        $cart_model = $this->Cart_Model;
-        $cart_model->id_customer = $this->cookie->customer->id_customer;
-        $cart_model->secure_key = $this->cookie->customer->secure_key;
-        $affectd_rows = $this->Cart_Model->mergeIdCartWithCustomer($cart_model, $id_cart);
-        $this->response(array(
-            'affectd_rows' => $affectd_rows), 200);
+
+        $customer = $this->oauth->getCustomer();
+        if($customer !=null){
+            $this->load->model('Cart_Product_Model');
+            $id_cart_array = $this->_getLastNoneOrderedCart($customer->id_customer);
+            $affectd_rows = $this->Cart_Product_Model->mergeIdCartWithCustomer($id_cart_array['id_cart'], $id_cart);
+            $this->response(($affectd_rows > 0) ? array('result' => 'merged') : array(0), 200);
+        }
+
     }
 
     /**
-     * @param null $id_customer
+     * @param int id_customer
      */
     public function getLastNoneOrderedCart_get($id_customer = null)
     {
@@ -54,7 +54,7 @@ class Cart extends CartBase implements ConfigurationListner
     }
 
     /**
-     * @param $id_customer
+     * @param int id_customer
      * @return mixed
      */
     private function _getLastNoneOrderedCart($id_customer)
@@ -143,17 +143,20 @@ class Cart extends CartBase implements ConfigurationListner
      */
     public function insertProductToCartById_post()
     {
-        $id_cart = $this->addCart(true);
+        /*$id_cart = $this->addCart(true);
 
-        if ($id_cart == 0)
+        if ($id_cart == 0 && $this->cookie!=null){
             // on récupère l'id cart du customer qui s'est authentifié
             $id_cart = $this->cookie->customer->id_cart;
+        }*/
+
 
         // Récupère le json en POST
         $cart = $this->post();
 
         if (!empty($cart)) {
             $this->load->model('Cart_Model');
+            $id_cart = (int)$cart['id_cart'];
             $id_product = (int)$cart['id_product'];
             $id_product_attribute = (int)$cart['id_product_attribute'];
             $clientQty = (int)$cart['quantity'];
@@ -357,6 +360,7 @@ class Cart extends CartBase implements ConfigurationListner
      */
     public function getProductByCartId_get($id_cart = null)
     {
+
         $this->load->model('Product_Model');
         $this->load->model('Cart_Model');
         $product_list = $this->Product_Model->getProductByCartId($id_cart);
@@ -365,26 +369,28 @@ class Cart extends CartBase implements ConfigurationListner
 
         foreach ($product_list as $key => $product) {
             $product_array[] = array(
-                'id_product' => (int)$product->id_product,
-                'id_product_attribute' => (int)$product->id_product_attribute,
-                'id_cart' => (int)$product->id_cart,
-                'id_image' => (int)$product->id_image,
-                'url_image' => 'http://142.4.211.181/dwickrema/prestashop.v1/ci/index.php/api/image/' . (int)$product->id_image . '/get',
-                'id_address_delivery' => (int)$product->id_address_delivery,
-                'quantity' => (int)$product->cart_quantity,
-                'id_shop' => (int)$product->id_shop,
-                'libelle_produit' => $product->name,
-                'id_product' => (int)$product->id_product,
-                'width' => (double)$product->width,
-                'height' => (double)$product->height,
-                'depth' => (double)$product->depth,
-                'id_supplier' => (int)$product->id_supplier,
-                'id_manufacturer' =>(int)$product->id_manufacturer,
-                'is_virtual' => (int)$product->is_virtual,
-                'description_short' => $product->description_short,
-                'available_now' => $product->available_now,
-                'available_later' => $product->available_later,
-                // 'order_price'=>$product->getProductPriceBis($product, true, $this),
+                'id_product'            => (int)$product->id_product,
+                'id_product_attribute'  => (int)$product->id_product_attribute,
+                'id_cart'               => (int)$product->id_cart,
+                'id_image'              => (int)$product->id_image,
+                'id_address_delivery'   => (int)$product->id_address_delivery,
+                'quantity'              => (int)$product->cart_quantity,
+                'id_shop'               => (int)$product->id_shop,
+                'libelle_produit'       => $product->name,
+                'default_on'            => $product->default_on,
+                'id_product'            => (int)$product->id_product,
+                'width'                 => (double)$product->width,
+                'height'                => (double)$product->height,
+                'depth'                 => (double)$product->depth,
+                'id_supplier'           => (int)$product->id_supplier,
+                'id_manufacturer'       => (int)$product->id_manufacturer,
+                'is_virtual'            => (int)$product->is_virtual,
+                'description_short'     => $product->description_short,
+                'available_now'         => $product->available_now,
+                'available_later'       => $product->available_later,
+                'pai_id_image'          => (int)$product->pai_id_image,
+                'url_image'             => ($product->pai_id_image == 0) ? 'http://142.4.211.181/dwickrema/prestashop.v1/ci/index.php/api/image/' . (int)$product->id_image . '/get'  : 'http://142.4.211.181/dwickrema/prestashop.v1/ci/index.php/api/image/' . (int)$product->pai_id_image . '/get',
+                // 'order_price'        =>$product->getProductPriceBis($product, true, $this),
             );
         }
         if ($product_list != null)

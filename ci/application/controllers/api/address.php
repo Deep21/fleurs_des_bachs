@@ -24,6 +24,7 @@ class Address extends REST_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('form_validation');
 
     }
 
@@ -64,12 +65,8 @@ class Address extends REST_Controller
      */
     public function addAddress_post()
     {
-        //load the auth library
-        //check if we're logged
         //$this->oauth->verifyResourceRequest();
         //retrieve the post value sent by the client
-        $this->load->library('form_validation');
-
         $address = $this->post();
 
         if (!empty($address)) {
@@ -115,7 +112,7 @@ class Address extends REST_Controller
                     'deleted' => false), 200);
 
             } else {
-            $this->response(array($this->router->class => array('message' => validation_errors())), 200);
+            $this->response(array('message' => validation_errors()), 200);
             }
 
     }
@@ -126,10 +123,7 @@ class Address extends REST_Controller
      */
     public function editAddressById_put($id_address = null)
     {
-        $this->load->library('form_validation');
-        //retrieve the post value sent by the client
-        //param is addres_put
-
+        //retrieve address json
         $address = $this->put();
 
         if (!empty($address)) {

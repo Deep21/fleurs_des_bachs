@@ -1,0 +1,1 @@
+[2015-05-13 23-20-54] PHP Notice: Trying to get property of non-object in /home/dwickrema/prestashop.v1/ci/application/controllers/api/cart.php:22  @  http://142.4.211.181/dwickrema/prestashop.v1/ci/index.php/api/cart/product/add?cart=up 

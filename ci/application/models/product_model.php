@@ -330,6 +330,7 @@ class Product_Model extends CI_Model
       cp.id_address_delivery,
       pl.name,
       p.*,
+      pa.default_on,
       i.id_image,
       pl.description_short,
       pl.available_now,
@@ -362,7 +363,25 @@ class Product_Model extends CI_Model
       pai.id_image AS pai_id_image,
       il.legend AS pai_legend,
       IFNULL(product_attribute_shop.minimal_quantity,
-      product_shop.minimal_quantity) AS minimal_quantity', false)->from('cart_product AS cp')->join('product AS p', 'p.id_product = cp.id_product', 'left')->join('image AS i', 'p.id_product = i.id_image', 'left')->join('product_shop product_shop', 'product_shop.id_shop = cp.id_shop AND product_shop.id_product = p.id_product', 'inner')->join('product_lang pl', 'p.id_product = pl.id_product AND pl.id_lang = 1 AND pl.id_shop = cp.id_shop', 'left')->join('category_lang cl', 'product_shop.id_category_default = cl.id_category AND cl.id_lang = 1 AND cl.id_shop = cp.id_shop', 'left')->join('product_supplier ps', 'ps.id_product = cp.id_product AND ps.id_product_attribute = cp.id_product_attribute AND ps.id_supplier = p.id_supplier', 'left')->join('stock_available stock', 'stock.id_product = cp.id_product AND stock.id_shop = 1', 'left')->join('product_attribute pa', 'pa.id_product_attribute = cp.id_product_attribute', 'left')->join('product_attribute_shop product_attribute_shop', 'product_attribute_shop.id_shop = cp.id_shop AND product_attribute_shop.id_product_attribute = pa.id_product_attribute', 'left')->join('product_attribute_image pai', 'pai.id_product_attribute = pa.id_product_attribute', 'left')->join('image_lang il', 'il.id_image = pai.id_image AND il.id_lang = 1', 'left')->where('cp.id_cart', (int)$id_cart)->where('stock.id_product_attribute', "IFNULL(cp.id_product_attribute, 0)")->group_by('unique_id')->order_by('p.id_product asc, cp.id_product_attribute asc, cp.date_add asc')->get()->result('Product_Model');
+      product_shop.minimal_quantity) AS minimal_quantity', false)
+            ->from('cart_product AS cp')
+            ->join('product AS p', 'p.id_product = cp.id_product', 'left')
+            ->join('image AS i', 'p.id_product = i.id_image', 'left')
+            ->join('product_shop product_shop', 'product_shop.id_shop = cp.id_shop AND product_shop.id_product = p.id_product', 'inner')
+            ->join('product_lang pl', 'p.id_product = pl.id_product AND pl.id_lang = 1 AND pl.id_shop = cp.id_shop', 'left')
+            ->join('category_lang cl', 'product_shop.id_category_default = cl.id_category AND cl.id_lang = 1 AND cl.id_shop = cp.id_shop', 'left')
+            ->join('product_supplier ps', 'ps.id_product = cp.id_product AND ps.id_product_attribute = cp.id_product_attribute AND ps.id_supplier = p.id_supplier', 'left')
+            ->join('stock_available stock', 'stock.id_product = cp.id_product AND stock.id_shop = 1', 'left')
+            ->join('product_attribute pa', 'pa.id_product_attribute = cp.id_product_attribute', 'left')
+            ->join('product_attribute_shop product_attribute_shop', 'product_attribute_shop.id_shop = cp.id_shop AND product_attribute_shop.id_product_attribute = pa.id_product_attribute', 'left')
+            ->join('product_attribute_image pai', 'pai.id_product_attribute = pa.id_product_attribute', 'left')
+            ->join('image_lang il', 'il.id_image = pai.id_image AND il.id_lang = 1', 'left')
+            ->where('cp.id_cart', (int)$id_cart)
+            ->where('stock.id_product_attribute', "IFNULL(cp.id_product_attribute, 0)")
+            ->group_by('unique_id')
+            ->order_by('p.id_product asc, cp.id_product_attribute asc, cp.date_add asc')
+            ->get()
+            ->result('Product_Model');
     }
 
     /**

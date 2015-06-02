@@ -32,7 +32,7 @@ class Cart_Product_Model extends CI_Model
     }
 
 
-    public function getCartProductByIdAndId_Attribute($id_cart, $id_carts)
+    public function getCartProductByIdAndId_Attribute($id_cart)
     {
         return $this->db->select('cp.*')
             ->from('cart_product cp')
@@ -66,5 +66,12 @@ class Cart_Product_Model extends CI_Model
             'id_product_attribute' => $cart_product['id_product_attribute'], 'quantity' => $cart_product['quantity'],
             'date_add' => $cart_product['date_add'],
         ));
+    }
+
+
+    public function mergeIdCartWithCustomer($last_none_ordered_id_cart, $id_cart){
+        $this->db->where('id_cart', (int)$id_cart);
+        $this->db->update(self::$table, array('id_cart'=>(int)$last_none_ordered_id_cart));
+        return $this->db->affected_rows();
     }
 }
